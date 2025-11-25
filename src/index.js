@@ -1,3 +1,4 @@
+// src/index.js
 const express = require('express');
 const morgan = require('morgan');
 const cors = require('cors');
@@ -35,7 +36,14 @@ app.post('/api/quote', (req, res) => {
   res.status(201).json(newQuote);
 });
 
-app.listen(PORT, () => {
-  console.log(`Quote API running on http://localhost:${PORT}`);
-  console.log(`Total quotes loaded: ${quotes.getAll().length}`);
-});
+// ON NE LANCE LE SERVEUR QUE SI LE FICHIER EST EXÉCUTÉ DIRECTEMENT
+// (pas dans les tests !)
+if (require.main === module) {
+  app.listen(PORT, () => {
+    console.log(`Quote API running on http://localhost:${PORT}`);
+    console.log(`Total quotes loaded: ${quotes.getAll().length}`);
+  });
+}
+
+// ON EXPORTE L’APP POUR LES TESTS
+module.exports = app;   // ←←←← LIGNE SUPER IMPORTANTE !
