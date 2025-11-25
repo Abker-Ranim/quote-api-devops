@@ -4,17 +4,22 @@ const morgan = require('morgan');
 const cors = require('cors');
 const helmet = require('helmet');
 const quotes = require('./quotes');
-
+const { requestIdMiddleware, winstonMiddleware } = require('./middleware/logger');
+const { metricsMiddleware, metricsEndpoint } = require('./middleware/metrics');
 const app = express();
 const PORT = process.env.PORT || 3000;
 
+app.use(requestIdMiddleware);
 app.use(helmet());
 app.use(cors());
 app.use(morgan('combined'));
 app.use(express.json());
-
+app.use(metricsMiddleware);       // ← metrics
+app.use(requestIdMiddleware);
+app.use(winstonMiddleware);   
 // Routes
 app.get('/health', (req, res) => res.json({ status: 'OK' }));
+app.get('/metrics', metricsEndpoint);
 
 app.get('/api/quote', (req, res) => {
   const quote = quotes.getRandom();
