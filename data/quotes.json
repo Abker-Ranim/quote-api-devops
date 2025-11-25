@@ -1,0 +1,27 @@
+[
+  {
+    "id": 1,
+    "text": "La vie est ce qui arrive pendant que tu fais d'autres plans.",
+    "author": "John Lennon"
+  },
+  {
+    "id": 2,
+    "text": "Le code sans tests est un bug qui attend son heure.",
+    "author": "Anonyme"
+  },
+  {
+    "id": 3,
+    "text": "Première règle du DevOps : automatise tout.",
+    "author": "Moi"
+  },
+  {
+    "id": 4,
+    "text": "FastAPI c'est bien, mais Express c'est la maison.",
+    "author": "Toi en 2025"
+  },
+  {
+    "id": 5,
+    "text": "Le succès commence par la motivation.",
+    "author": "Ranim"
+  }
+]
