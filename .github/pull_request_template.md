@@ -1,19 +1,15 @@
 ## Issue liée
-
-Closes #1
+Closes #NUMERO_ISSUE
 
 ## Description
-
-Ajout des tests unitaires et d'intégration avec Jest + Supertest
+<!-- Décris brièvement ce que fait cette PR -->
 
 ## Checklist
-
-- [ ] Tous les tests passent (`npm test`)
-- [ ] Couverture > 80%
-- [ ] Pas de regression sur les routes existantes
+- [ ] Tests unitaires ajoutés et passent
+- [ ] Lint passe (on ajoutera ESLint plus tard si besoin)
+- [ ] Code revu localement
+- [ ] Documentation mise à jour (README si besoin)
 
 ## Comment tester
-
 ```bash
 npm test
-```
