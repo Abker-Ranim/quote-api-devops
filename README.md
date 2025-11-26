@@ -38,14 +38,14 @@
 docker run -p 3000:3000 ghcr.io/abker-ranim/quote-api-devops/quote-api:latest
 ```
 
-### 2. 
+### 2. Avec Kubernetes + Minikube (local)
 ```bash
 minikube start --driver=docker
 kubectl apply -f k8s/
 minikube service quote-api --url
 ```
 
-### 3. 
+### 3. En local (développement)
 ```bash
 npm ci
 npm run dev
