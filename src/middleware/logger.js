@@ -16,14 +16,14 @@ const fileTransport = new transports.DailyRotateFile({
   datePattern: 'YYYY-MM-DD',
   zippedArchive: true,
   maxSize: '20m',
-  maxFiles: '14d',
+  maxFiles: '14d', //supprime les logs de plus de 14 jours.
   format: format.combine(
     format.timestamp(),
     format.json()
   )
 });
 
-// 3. Logger principal (remplace express-winston pour avoir 100 % contrôle)
+// 3. Logger :permet de logger manuellement des événements métiers ou erreurs spécifiques dans le code, en dehors des requêtes HTTP.
 const logger = createLogger({
   level: 'info',
   format: format.combine(
@@ -38,11 +38,11 @@ const logger = createLogger({
         statusCode,
         responseTime: responseTime ? `${responseTime}ms` : undefined,
         message
-      }, null, 2);   // null, 2 → joli en fichier, tu peux virer en prod
+      }, null, 2);   
     })
   ),
   transports: [
-    new transports.Console(),   // toujours visible dans Docker/K8s
+    new transports.Console(),   // toujours visible dans Docker
     fileTransport               // + persistance fichier
   ],
   exceptionHandlers: [
@@ -51,7 +51,7 @@ const logger = createLogger({
   ]
 });
 
-// 4. Middleware compatible Express (on remplace expressWinston.logger)
+// 4. Middleware compatible Express :s’occupe uniquement des logs automatiques des requêtes HTTP (méthode, URL, code de statut, temps de réponse).
 const winstonMiddleware = (req, res, next) => {
   const start = Date.now();
 
@@ -80,5 +80,5 @@ const winstonMiddleware = (req, res, next) => {
 module.exports = {
   logger,              // si tu veux logger manuellement ailleurs
   requestIdMiddleware,
-  winstonMiddleware    // ← à utiliser dans index.js à la place de "logger"
+  winstonMiddleware    
 };
