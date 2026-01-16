@@ -1,4 +1,3 @@
-# Dockerfile – version finale qui marche à 100%
 FROM node:20-alpine
 
 WORKDIR /app
