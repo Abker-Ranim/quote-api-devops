@@ -1,4 +1,3 @@
-// src/middleware/metrics.js
 const client = require('prom-client');
 
 // Collecte des métriques par défaut (CPU, mémoire, etc.)
@@ -10,7 +9,7 @@ const httpRequestDurationMicroseconds = new client.Histogram({
   name: 'http_request_duration_ms',
   help: 'Duration of HTTP requests in ms',
   labelNames: ['method', 'route', 'code'],
-  buckets: [5, 10, 25, 50, 100, 200, 500, 1000, 2500]
+  buckets: [5, 10, 25, 50, 100, 200, 500, 1000, 2500] //définit les intervalles de durée (en millisecondes)
 });
 
 const httpRequestCounter = new client.Counter({
@@ -19,6 +18,7 @@ const httpRequestCounter = new client.Counter({
   labelNames: ['method', 'route', 'code']
 });
 
+//mesure chaque requête et remplit les métriques.
 const endTimer = (req, res, next) => {
   const start = Date.now();
   res.on('finish', () => {
